@@ -6,9 +6,8 @@ class GridScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView(
-      padding: const EdgeInsets.symmetric(vertical:80, horizontal:40),
-      children: CATEGORIES.map((cat) {
-        return Container(margin: EdgeInsets.all(10),child: GridItemWidget(cat.name, cat.id));
+      children: categories.map((cat) {
+        return Container(margin: EdgeInsets.all(10),child: GridItemWidget(cat.name, cat.id, cat.route ));
       }).toList(),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,

@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import '../screen/terminet_screen.dart';
 
 class GridItemWidget extends StatelessWidget {
-
   final String title;
   final String id;
-  GridItemWidget(this.title, this.id);
+  final String route;
+
+  GridItemWidget(this.title, this.id, this.route);
 
   //final thisCategory = CATEGORIES.firstWhere((x) => id);
-  
-  void showCategory(BuildContext context){
-    Navigator.of(context).pushNamed(TerminetScreen.routeName);
 
+  void showCategory(BuildContext context) {
+    Navigator.of(context).pushNamed(route);
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap:() => showCategory(context),
-          child: Container(
+      onTap: () => showCategory(context),
+      child: Container(
         padding: const EdgeInsets.all(15),
         child: Text(
           title,

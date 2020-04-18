@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import './screen/lajme_screen.dart';
 import './screen/terminet_screen.dart';
+import './screen/profili_screen.dart';
 import './screen/grid_screen.dart';
+import './screen/rezervo_screen.dart';
+import './screen/tabela_screen.dart';
+import './screen/rezultatet_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,6 +34,11 @@ class MyApp extends StatelessWidget {
       home: Menu(),
       routes: {
         TerminetScreen.routeName: (ctx) => TerminetScreen(),
+        LajmeScreen.routeName: (ctx) => LajmeScreen(),
+        ProfiliScreen.routeName: (ctx) => ProfiliScreen(),
+        RezultatetScreen.routeName: (ctx) => RezultatetScreen(),
+        TabelaScreen.routeName: (ctx) => TabelaScreen(),
+        RezervoScreen.routeName: (ctx) => RezervoScreen(),
       },
     );
   }
