@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/app_drawer.dart';
 
 class TabelaScreen extends StatelessWidget {
   static const routeName = '/tabela_screen';
@@ -6,9 +7,12 @@ class TabelaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tabela'),
+        title: Text('a'),
       ),
-      body: Text('tb'),
+      drawer: AppDrawer(),
+      body: Column(
+        children: <Widget>[Text('1')],
+      ),
     );
   }
 }

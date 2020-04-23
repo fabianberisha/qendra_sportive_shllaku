@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/app_drawer.dart';
 
 class RezervoScreen extends StatelessWidget {
   static const routeName = '/rezervo_screen';
@@ -6,7 +7,8 @@ class RezervoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Rezervo')),
-      body: Text('rz'),
+      drawer: AppDrawer(),
+      body: Container(width: 200 ,child: Text('rz')),
     );
   }
 }

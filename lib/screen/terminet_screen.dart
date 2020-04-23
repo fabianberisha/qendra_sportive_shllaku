@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
-import '../data/termin_data.dart';
+import '../widgets/app_drawer.dart';
 
 class TerminetScreen extends StatelessWidget {
-  static const routeName = '/terminet_screen';
+  static const routeName = '/ndeshjet_screen';
   static const user = 'Fabian';
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Terminet')),
+      appBar: AppBar(title: Text('Ndeshjet')),
+      drawer: AppDrawer(),
       body: Container(
         height: 200,
         child: Column(
-          children: TERMINET.map((termin) {
-            return Row(
-              children: <Widget>[
-                Text(termin.nameOfThePerson),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(termin.hour.toString()),
-              ],
-            );
-          }).toList(),
+
         ),
       ),
     );
