@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './providers/ndeshjet.dart';
+import './models/ndeshjet.dart';
 
 import './screen/home_screen.dart';
 import './screen/lajme_screen.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
                   title: TextStyle(
                     color: Colors.blue,
                     fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Ubuntu',
                   ),
                   body1: TextStyle(
                     color: Colors.black,

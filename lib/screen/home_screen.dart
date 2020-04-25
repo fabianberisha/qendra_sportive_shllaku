@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../providers/ndeshjet.dart';
+import '../models/ndeshjet.dart';
 import '../widgets/app_drawer.dart';
 
 class HomeScreen extends StatelessWidget {

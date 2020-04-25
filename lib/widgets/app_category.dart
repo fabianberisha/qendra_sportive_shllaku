@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../providers/categories.dart';
+import '../models/categories.dart';
 
 class AppCategory extends StatelessWidget {
   @override
@@ -12,12 +12,16 @@ class AppCategory extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed(cat.route);
             },
             child: Card(
-                child: ListTile(
-              leading: Text(cat.name),
-              title: Container(
-                child: Icon(cat.icon),
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(5),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween ,children: [
+              Text(cat.name, style: Theme.of(context).textTheme.title),
+              Container(
+                  child: Icon(cat.icon),
               ),
-            )),
+            ]),
+                )),
           ),
         );
       }).toList(),
