@@ -84,6 +84,24 @@ class NdeshjetItem with ChangeNotifier {
       hour: TimeOfDay(hour: 16, minute: 0),
       date: DateTime.now(),
     ),
+    Ndeshja(
+      id: 6,
+      user: 'Fabian',
+      hour: TimeOfDay(hour: 17, minute: 0),
+      date: DateTime.now(),
+    ),
+    Ndeshja(
+      id: 6,
+      user: 'Fabian',
+      hour: TimeOfDay(hour: 19, minute: 0),
+      date: DateTime.now(),
+    ),
+    Ndeshja(
+      id: 6,
+      user: 'Fabian',
+      hour: TimeOfDay(hour: 20, minute: 0),
+      date: DateTime.now(),
+    ),
   ];
   List<Ndeshja> get ndeshjet {
     return [..._ndeshjet];
@@ -95,13 +113,21 @@ class NdeshjetItem with ChangeNotifier {
     filtereMatches.forEach((match) => matchesTime.add(match.hour));
     var freeTime = [];
     orari.forEach((orar) => freeTime.add(orar.hour));
-    var output = freeTime.where((element) => !matchesTime.contains(element)).toList();
-
+    var output =
+        freeTime.where((element) => !matchesTime.contains(element)).toList();
     var reservations = orari.where((el) => output.contains(el.hour)).toList();
-    
-    print(reservations);
-
+    print(reservations.map((or) => or.hour).toList());
     return reservations.map((or) => or.hour).toList();
+  }
+
+  void bookFunc(DateTime date, TimeOfDay time, String userid, int id) {
+    _ndeshjet.add(Ndeshja(
+      id: id, //database id
+      user: userid,
+      hour: time,
+      date: date,
+    ));
+    notifyListeners();
   }
 
   List<Ndeshja> findMatch(DateTime date) {

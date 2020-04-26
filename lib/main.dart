@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (ctx) => NdeshjetItem(),
       child: MaterialApp(
+        builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+            child: child),
         title: 'QSShllaku',
         theme: ThemeData(
             primaryColor: Colors.blue,
