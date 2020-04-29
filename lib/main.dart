@@ -5,7 +5,7 @@ import './models/ndeshjet.dart';
 
 import './screen/home_screen.dart';
 import './screen/lajme_screen.dart';
-import './screen/terminet_screen.dart';
+import './screen/ndeshjet_screen.dart';
 import './screen/profili_screen.dart';
 import './screen/rezervo_screen.dart';
 import './screen/tabela_screen.dart';

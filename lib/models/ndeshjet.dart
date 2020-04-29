@@ -10,23 +10,23 @@ class Orari {
   );
 }
 
-enum Perfundon { Humbje, Barazim, Fitore }
+enum Perfundon { Humbje, Barazim, Fitore, Soon }
 
 class Ndeshja {
   final int id;
   final String user;
   final TimeOfDay hour;
   final DateTime date;
-  Perfundon perfundon;
-  String rezultati;
+  final String rezultati;
+  final Perfundon perfundon;
 
   Ndeshja({
     @required this.user,
     @required this.hour,
     @required this.date,
     @required this.id,
-    this.perfundon = Perfundon.Humbje,
-    this.rezultati = '',
+    this.perfundon = Perfundon.Soon,
+    this.rezultati,
   });
 }
 
@@ -50,15 +50,15 @@ class NdeshjetItem with ChangeNotifier {
 
   final _ndeshjet = [
     Ndeshja(
-      id: 1,
-      user: 'John',
-      hour: TimeOfDay(hour: 12, minute: 0),
+      id: 3,
+      user: 'Fabian',
+      hour: TimeOfDay(hour: 0, minute: 0),
       date: DateTime.now(),
     ),
     Ndeshja(
-      id: 2,
-      user: 'Jack',
-      hour: TimeOfDay(hour: 13, minute: 0),
+      id: 3,
+      user: 'Fabian',
+      hour: TimeOfDay(hour: 20, minute: 0),
       date: DateTime.now(),
     ),
     Ndeshja(
