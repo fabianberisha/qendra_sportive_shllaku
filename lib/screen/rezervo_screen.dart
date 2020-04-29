@@ -19,9 +19,7 @@ class RezervoScreen extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: Text('Kalendari i orareve te lira per rezervim.')),
           ),
-          Calendar(),
-          
-
+          Calendar(),      
         ],
       ),
     );
