@@ -26,7 +26,7 @@ class _ChooseResultState extends State<ChooseResult> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         DropdownButton(
-          hint: Text("Select The Gender"),
+          hint: Text("Si perfundoj?"),
           value: _perfundon,
           items: _finish.keys.map((value) {
             return DropdownMenuItem(
