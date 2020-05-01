@@ -1,39 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
+
 import '../models/ndeshjet.dart';
+import '../widgets/button_rezervo.dart';
 
-class MatchAvailable extends StatefulWidget {
-  final DateTime tapedDate;
-
-  MatchAvailable(this.tapedDate);
-
-  @override
-  _MatchAvailableState createState() => _MatchAvailableState();
-}
-
-class _MatchAvailableState extends State<MatchAvailable> {
-  int _selectedIndex = 0;
-
-  void _onSelected(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initializeDateFormatting();
-  }
-
+class MatchAvailable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
+    initializeDateFormatting();
+    final ndeshjetProv = Provider.of<NdeshjetItem>(context, listen: false);
     final _ndeshjetFilter =
-        Provider.of<NdeshjetItem>(context, listen: false).checkReservations(widget.tapedDate);
-    var time = _ndeshjetFilter[_selectedIndex];
+        ndeshjetProv.checkReservations(ndeshjetProv.tapedDate);
     return Column(
       children: <Widget>[
         Container(
@@ -56,10 +34,10 @@ class _MatchAvailableState extends State<MatchAvailable> {
                   itemBuilder: ((ctx, index) {
                     return index != (_ndeshjetFilter.length - 1)
                         ? GestureDetector(
-                            onTap: () => _onSelected(index),
+                            onTap: () => ndeshjetProv.onSelected(index),
                             child: Card(
-                              color: _selectedIndex != null &&
-                                      _selectedIndex == index
+                              color: ndeshjetProv.selectedIndex != null &&
+                                      ndeshjetProv.selectedIndex == index
                                   ? Colors.lightGreen
                                   : Colors.white,
                               elevation: 8,
@@ -84,47 +62,7 @@ class _MatchAvailableState extends State<MatchAvailable> {
                   itemCount: _ndeshjetFilter.length,
                 ),
         ),
-        RaisedButton(
-          child: Text('Rezervo tani!'),
-          elevation: 6,
-          onPressed: () {
-            showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) {
-                  
-                  return AlertDialog(
-                    
-                    title: Text(
-                        'Konfirmoni rezervimin tuaj. Ora ${_ndeshjetFilter[_selectedIndex].format(context)}, ${DateFormat.MMMMd('sq').format(widget.tapedDate)} ditë ${DateFormat.EEEE('sq').format(widget.tapedDate)}.'),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text('Konfirmo'),
-                        onPressed: () {
-                          if (_ndeshjetFilter.length == 1) {
-                            return;
-                          }
-                          Provider.of<NdeshjetItem>(context, listen: false)
-                              .bookFunc(widget.tapedDate, time, 'Fabian', 4);
-
-                          setState(() {
-                            _selectedIndex = 0;
-                          });
-
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      FlatButton(
-                        child: Text('Zgjedhni orar tjetër'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ],
-                  );
-                });
-          },
-        ),
+        Button()
       ],
     );
   }

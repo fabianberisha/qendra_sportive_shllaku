@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:calendar_strip/calendar_strip.dart';
+import 'package:provider/provider.dart';
+
 import '../widgets/match_available_widget.dart';
+import '../models/ndeshjet.dart';
 
-class Calendar extends StatefulWidget {
-  @override
-  _CalendarState createState() => _CalendarState();
-}
-
-class _CalendarState extends State<Calendar> {
-  var tapedDate = DateTime.now();
+class Calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final nextMonth = DateTime.now().month + 1;
-    final substract = 31 - DateTime.now().day;
-    final days = 31 - substract;
-    final start = DateTime.now();
-    final end = DateTime(DateTime.now().year, nextMonth, days);
+    final ndeshjetProv = Provider.of<NdeshjetItem>(context);
+
     return Column(
       children: <Widget>[
         Container(
@@ -29,12 +23,10 @@ class _CalendarState extends State<Calendar> {
           child: Card(
             elevation: 6,
             child: CalendarStrip(
-              startDate: start,
-              endDate: end,
+              startDate: DateTime.now(),
+              endDate: ndeshjetProv.end,
               onDateSelected: (date) {
-                setState(() {
-                  tapedDate = date;
-                });
+                ndeshjetProv.onTap(date);
               },
             ),
           ),
@@ -42,7 +34,7 @@ class _CalendarState extends State<Calendar> {
         SizedBox(
           height: 30,
         ),
-        MatchAvailable(tapedDate)
+        MatchAvailable()
       ],
     );
   }

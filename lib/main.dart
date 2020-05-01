@@ -12,7 +12,6 @@ import './screen/tabela_screen.dart';
 import './screen/rezultatet_screen.dart';
 
 void main() => runApp(MyApp());
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         builder: (context, child) => MediaQuery(
             data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-            child: child),
+            child: child),          
         title: 'QSShllaku',
         theme: ThemeData(
             primaryColor: Colors.blue,

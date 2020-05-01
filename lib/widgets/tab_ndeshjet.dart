@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
-import '../models/ndeshjet.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/result_widget.dart';
+import '../models/ndeshjet.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-class TabNdeshjet extends StatefulWidget {
+class TabNdeshjet extends StatelessWidget {
   final List<Ndeshja> userMatches;
 
-  TabNdeshjet(this.userMatches);
-
-  @override
-  _TabNdeshjetState createState() => _TabNdeshjetState();
-}
-
-class _TabNdeshjetState extends State<TabNdeshjet> {
-  @override
-  void initState() {
-    initializeDateFormatting();
-    super.initState();
-  }
+  TabNdeshjet(
+    this.userMatches,
+  );
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<NdeshjetItem>(context);
+    initializeDateFormatting();
     return Container(
       height: 400,
       child: Column(
-        children: widget.userMatches.map((match) {
+        children: userMatches.map((match) {
           return Card(
             elevation: 8,
             child: ListTile(
@@ -59,10 +51,20 @@ class _TabNdeshjetState extends State<TabNdeshjet> {
                               .toUpperCase(),
                 ),
               ),
-              trailing: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                child: Text('Pending'),
-              ),
+              trailing: (match.perfundon == Perfundon.UnSigned &&
+                      Provider.of<NdeshjetItem>(context, listen: false)
+                          .filterMatches('finished')
+                          .contains(match))
+                  ? ChooseResult(match.id)
+                  : Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      child: match.perfundon == Perfundon.Fitore
+                          ? Text('W')
+                          : match.perfundon == Perfundon.Barazim
+                              ? Text('D')
+                              : match.perfundon == Perfundon.Humbje
+                                  ? Text('L')
+                                  : Text('')),
             ),
           );
         }).toList(),

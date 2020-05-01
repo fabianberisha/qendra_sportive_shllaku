@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import '../widgets/app_drawer.dart';
 import 'package:provider/provider.dart';
 import '../models/ndeshjet.dart';
-import 'package:intl/intl.dart';
 
 import '../widgets/tab_ndeshjet.dart';
 
 class TerminetScreen extends StatefulWidget {
   static const routeName = '/ndeshjet_screen';
-  static const userId = 'Fabian';
 
   @override
   _TerminetScreenState createState() => _TerminetScreenState();
@@ -26,9 +24,10 @@ class _TerminetScreenState extends State<TerminetScreen>
 
   @override
   Widget build(BuildContext context) {
-    print(DateTime.now().hour);
-    final userMatches =
-        Provider.of<NdeshjetItem>(context).findMatch(TerminetScreen.userId);
+    final matches = Provider.of<NdeshjetItem>(context);
+    matches.findMatch(matches
+        .userid); //TODO change matches head destination that all widgets can listen
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Ndeshjet'),
@@ -52,28 +51,15 @@ class _TerminetScreenState extends State<TerminetScreen>
       drawer: AppDrawer(),
       body: TabBarView(
         children: [
-           TabNdeshjet(
-            userMatches
-                .where((match) =>
-                    match.date.day == DateTime.now().day &&
-                    match.date.month == DateTime.now().month &&
-                    match.hour.hour == DateTime.now().hour)
-                .toList(),
+          TabNdeshjet(
+            matches.filterMatches('playing'),
           ),
           TabNdeshjet(
-            userMatches
-                .where((match) =>
-                    match.date.day == DateTime.now().day &&
-                    match.date.month == DateTime.now().month &&
-                    match.hour.hour > DateTime.now().hour)
-                .toList(),
+            matches.filterMatches('soon'),
           ),
-          TabNdeshjet(userMatches
-              .where((match) =>
-                  match.date.day <= DateTime.now().day &&
-                  match.date.month <= DateTime.now().month &&
-                  match.hour.hour < DateTime.now().hour)
-              .toList()),
+          TabNdeshjet(
+            matches.filterMatches('finished'),
+          )
         ],
         controller: _tabController,
       ),

@@ -10,7 +10,7 @@ class Orari {
   );
 }
 
-enum Perfundon { Humbje, Barazim, Fitore, Soon }
+enum Perfundon { Humbje, Barazim, Fitore, NukZgjedh, UnSigned }
 
 class Ndeshja {
   final int id;
@@ -18,14 +18,14 @@ class Ndeshja {
   final TimeOfDay hour;
   final DateTime date;
   final String rezultati;
-  final Perfundon perfundon;
+  Perfundon perfundon;
 
   Ndeshja({
     @required this.user,
     @required this.hour,
     @required this.date,
     @required this.id,
-    this.perfundon = Perfundon.Soon,
+    this.perfundon = Perfundon.UnSigned,
     this.rezultati,
   });
 }
@@ -50,13 +50,13 @@ class NdeshjetItem with ChangeNotifier {
 
   final _ndeshjet = [
     Ndeshja(
-      id: 3,
+      id: 1,
       user: 'Fabian',
       hour: TimeOfDay(hour: 0, minute: 0),
       date: DateTime.now(),
     ),
     Ndeshja(
-      id: 3,
+      id: 2,
       user: 'Fabian',
       hour: TimeOfDay(hour: 20, minute: 0),
       date: DateTime.now(),
@@ -68,6 +68,31 @@ class NdeshjetItem with ChangeNotifier {
       date: DateTime.now(),
     ),
   ];
+
+  int selectedIndex = 0;
+
+  void onSelected(int index) {
+    selectedIndex = index;
+    notifyListeners();
+  }
+
+
+  final String userid = 'Fabian'; //TODO user id generate
+
+  var tapedDate = DateTime.now();
+
+  void onTap(DateTime date) {
+    tapedDate = date;
+    notifyListeners();
+  }
+
+  DateTime get end {
+    final nextMonth = DateTime.now().month + 1;
+    final substract = 31 - DateTime.now().day;
+    final days = 31 - substract;
+    return DateTime(DateTime.now().year, nextMonth, days);
+  }
+
   List<Ndeshja> get ndeshjet {
     return [..._ndeshjet];
   }
@@ -95,7 +120,49 @@ class NdeshjetItem with ChangeNotifier {
     notifyListeners();
   }
 
+  var findMatches;
+
   List<Ndeshja> findMatch(String userid) {
-    return _ndeshjet.where((match) => match.user == userid).toList();
+    findMatches = _ndeshjet.where((match) => match.user == userid).toList();
+    return findMatches;
+  }
+
+  Ndeshja findById(int id) {
+    return findMatches.firstWhere((match) => match.id == id);
+  }
+
+  List<Ndeshja> finishedMatch() {
+    return findMatches.where((match) => match.perfundon);
+  }
+
+  List<Ndeshja> filterMatches(String choice) {
+    if (choice == 'playing') {
+      return findMatches
+          .where((match) =>
+              match.date.year == DateTime.now().year &&
+              match.date.day == DateTime.now().day &&
+              match.date.month == DateTime.now().month &&
+              match.hour.hour == DateTime.now().hour)
+          .toList();
+    }
+
+    if (choice == 'soon') {
+      return findMatches
+          .where((match) =>
+              DateTime.now().isBefore(match.date) ||
+              (match.date.day == DateTime.now().day &&
+                  match.date.month == DateTime.now().month &&
+                  match.hour.hour > DateTime.now().hour))
+          .toList();
+    }
+
+    if (choice == 'finished') {
+      return findMatches
+          .where((match) =>
+              DateTime.now().isAfter(match.date) &&
+              DateTime.now().hour > match.hour.hour)
+          .toList();
+    }
+    return findMatches;
   }
 }
