@@ -11,18 +11,7 @@ class RezervoScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Rezervo')),
       drawer: AppDrawer(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Card(
-            elevation: 6,
-            child: Container(
-                padding: EdgeInsets.all(10),
-                child: Text('Kalendari i orareve te lira per rezervim.')),
-          ),
-          Calendar(),      
-        ],
-      ),
+      body: Calendar(),
     );
   }
 }

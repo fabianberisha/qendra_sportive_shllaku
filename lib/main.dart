@@ -25,16 +25,16 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             primaryColor: Colors.blue,
             textTheme: ThemeData.light().textTheme.copyWith(
-                  title: TextStyle(
+                  headline6: TextStyle(
                     color: Colors.blue,
                     fontSize: 24,
                     fontFamily: 'Ubuntu',
                   ),
-                  body1: TextStyle(
+                  bodyText1: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                   ),
-                  body2: TextStyle(
+                  bodyText2: TextStyle(
                     color: Colors.lightBlue.withOpacity(0.6),
                     fontSize: 18,
                   ),

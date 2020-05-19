@@ -27,7 +27,7 @@ class TabNdeshjet extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   match.hour.format(context),
-                  style: Theme.of(context).textTheme.body2,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ),
               subtitle: Container(
@@ -59,11 +59,11 @@ class TabNdeshjet extends StatelessWidget {
                   : Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: match.perfundon == Perfundon.Fitore
-                          ? Text('W')
+                          ? Text('W', style: TextStyle(color: Colors.green))
                           : match.perfundon == Perfundon.Barazim
                               ? Text('D')
                               : match.perfundon == Perfundon.Humbje
-                                  ? Text('L')
+                                  ? Text('L', style: TextStyle(color: Colors.red))
                                   : Text('')),
             ),
           );

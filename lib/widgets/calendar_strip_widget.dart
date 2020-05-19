@@ -8,8 +8,7 @@ import '../models/ndeshjet.dart';
 class Calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final ndeshjetProv = Provider.of<NdeshjetItem>(context);
-
+    final ndeshjetProv = Provider.of<NdeshjetItem>(context, listen: false);
     return Column(
       children: <Widget>[
         Container(
@@ -33,6 +32,10 @@ class Calendar extends StatelessWidget {
         ),
         SizedBox(
           height: 30,
+        ),
+        Text('Selekto nje orar.'),
+        SizedBox(
+          height: 10,
         ),
         MatchAvailable()
       ],

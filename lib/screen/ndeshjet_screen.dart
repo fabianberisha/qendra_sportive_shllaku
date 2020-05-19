@@ -24,10 +24,10 @@ class _TerminetScreenState extends State<TerminetScreen>
 
   @override
   Widget build(BuildContext context) {
-    final matches = Provider.of<NdeshjetItem>(context);
-    matches.findMatch(matches
-        .userid); //TODO change matches head destination that all widgets can listen
+    final matches = Provider.of<NdeshjetItem>(context, listen: false);
+    matches.findMatch(matches.userid);
 
+    print(matches.filterMatches('soon'));
     return Scaffold(
       appBar: AppBar(
         title: Text('Ndeshjet'),

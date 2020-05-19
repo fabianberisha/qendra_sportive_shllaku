@@ -11,7 +11,7 @@ class LajmeScreen extends StatelessWidget {
       body: Center(
         child: Text(
           'ljm',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
     );

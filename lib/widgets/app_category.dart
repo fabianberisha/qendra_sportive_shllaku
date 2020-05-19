@@ -16,7 +16,7 @@ class AppCategory extends StatelessWidget {
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.all(5),
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween ,children: [
-              Text(cat.name, style: Theme.of(context).textTheme.title),
+              Text(cat.name, style: Theme.of(context).textTheme.headline6),
               Container(
                   child: Icon(cat.icon),
               ),
